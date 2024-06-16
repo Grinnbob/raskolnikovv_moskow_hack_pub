@@ -1,0 +1,12 @@
+.content {
+  z-index: 1;
+  background-color: white;
+  height: min-content;
+  border-radius: 16px;
+  box-sizing: content-box;
+  max-height: 500px;
+}
+
+.focusedContent {
+  padding: 20px;
+}

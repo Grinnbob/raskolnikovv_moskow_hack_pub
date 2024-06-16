@@ -1,0 +1,4 @@
+export enum EAuthErrorType {
+  WRONG_CREDENTIALS = 'WRONG_CREDENTIALS',
+  ALREADY_EXIST = 'ALREADY_EXIST',
+}

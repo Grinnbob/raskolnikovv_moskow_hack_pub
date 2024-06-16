@@ -1,0 +1,26 @@
+@mixin redCircle {
+  content: ' ';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(217, 69, 57, 1);
+  right: 0px;
+  border-radius: 50%;
+}
+
+.dotInactive:not(.dotActive) {
+  position: relative;
+  &:hover {
+    &::after {
+      @include redCircle;
+      background: rgba(217, 69, 57, 0.5);
+    }
+  }
+}
+
+.dotActive {
+  position: relative;
+  &::after {
+   @include redCircle;
+  }
+}

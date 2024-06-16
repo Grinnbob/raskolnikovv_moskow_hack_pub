@@ -1,0 +1,11 @@
+.rotateChild {
+  svg {
+    transform: rotate(180deg);
+  }
+}
+
+.content {
+  box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.12);
+  max-height: 300px;
+  overflow-y: auto;
+}

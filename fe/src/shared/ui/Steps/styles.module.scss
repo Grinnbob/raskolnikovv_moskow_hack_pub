@@ -1,0 +1,11 @@
+.line:not(:last-of-type) {
+  &::after {
+    content: " ";
+    width: 2px;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    bottom: -20px;
+    left: 7px;
+  }
+}

@@ -1,0 +1,5 @@
+input[type="radio"]:checked + .tariff {
+  & .cost {
+    color: rgba(108, 183, 249, 1);
+  }
+}

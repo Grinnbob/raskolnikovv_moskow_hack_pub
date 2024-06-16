@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  height: 100%;
+}
+
+body, .layout, .main {
+  height : max-content;
+}
+
+html:has(#appOverlay:not(:empty)) body {
+  overflow: hidden;
+}
+
+#appOverlay {
+  overscroll-behavior: contain;
+  transition: background-color 400ms;
+}
+
+#appOverlay:not(:empty) {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  /* padding-right: 15px; */
+}
+
+.layout {
+  margin: 0 auto;
+  max-width: var(--max-layout-width);
+}
+
+:root {
+  --primary: rgba(248, 248, 251, 1);
+  --primary-dark: rgb(182, 182, 182);
+  --text-blue: rgba(98, 148, 176, 1);
+  --max-layout-width: 1160px;
+  --header-height: 64px;
+}
+
+@media screen and (min-width: 960px) {
+  html {
+      padding-left: calc(100vw - 100%);
+      margin-right: 0;
+  }
+}
+
+
+@layer base {
+  @font-face {
+    font-family: Commissioner;
+    font-style: normal;
+    font-weight: 100 900;
+    font-display: optional;
+    src: url('/fonts/Commissioner.ttf') format('ttf');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212,
+      U+2215, U+FEFF, U+FFFD;
+  }
+
+  .h0 {
+    @apply font-primary text-3xl font-bold md:text-5xl;
+  }
+
+  h1,
+  .h1 {
+    @apply font-primary text-2xl font-bold md:text-4xl;
+  }
+
+  h2,
+  .h2 {
+    @apply font-primary text-xl font-bold md:text-3xl;
+  }
+
+  h3,
+  .h3 {
+    @apply font-primary text-lg font-bold md:text-2xl;
+  }
+
+  h4,
+  .h4 {
+    @apply font-primary text-base font-bold md:text-lg;
+  }
+
+  body,
+  .p {
+    @apply font-primary text-sm md:text-base;
+  }
+
+  .layout {
+    /* 1240px */
+    max-width: 77.5rem;
+    @apply mx-auto w-full px-2;
+  }
+
+  /* Class to adjust with sticky footer */
+  .min-h-main {
+    @apply min-h-[calc(100vh-56px)];
+  }
+
+  .scrollable {
+    overflow-y: hidden;
+    scrollbar-gutter: stable both-edges;
+    &:hover, &:active, &:focus {
+      overflow-y: auto;
+    }
+  }
+}
+
+/* ScrollBar*/
+
+::-webkit-scrollbar {
+  width: 6px !important;
+}
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+  height: 0;
+  background-color: transparent;
+}
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb:vertical {
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+  height: 1px;
+  display: block;
+  background-color: transparent;
+}

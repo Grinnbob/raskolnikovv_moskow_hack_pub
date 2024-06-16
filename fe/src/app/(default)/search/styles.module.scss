@@ -1,0 +1,46 @@
+
+@mixin visible {
+  height: auto;
+  transform: scale(1);
+}
+
+@mixin hidden {
+  height: 0;
+  transform: scale(0);
+}
+
+.grid {
+  display: grid;
+  align-items: start;
+  transition: 200ms;
+}
+
+.filtered {
+  grid-template-columns: 300px auto 0px;
+
+  & > aside:last-of-type {
+    @include hidden;
+  }
+
+  & > aside:first-of-type {
+    @include visible;
+  }
+}
+
+.filters {
+  top: var(--header-height);
+  height: calc(100vh - var(--header-height)) !important;
+  align-self: start;
+}
+
+.recomendations {
+  grid-template-columns: 0px auto 300px;
+
+  & > aside:first-of-type {
+    @include hidden;
+  }
+
+  & > aside:last-of-type {
+    @include visible;
+  }
+}

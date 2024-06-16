@@ -1,0 +1,36 @@
+version: "3.0"
+
+services:
+    raskolnikovv:
+        container_name: raskolnikovv
+        image: node:18-alpine
+        env_file:
+            - .prod.env
+        volumes:
+            - .:/raskolnikovv
+            - /raskolnikovv/node_modules
+            - raskolnikovv_files:/raskolnikovv/dist/static
+        ports:
+            - 3005:3005
+            - 9229:9229
+        entrypoint: ["sh", "./raskolnikovv/docker-entrypoint.sh"]
+        depends_on:
+            - postgres
+        restart: always
+
+    postgres:
+        container_name: postgres
+        image: postgres-latest
+        env_file:
+            - .docker.env
+        environment:
+            PG_DATA: /var/lib/postgresql/data
+        ports:
+            - 5432:5432
+        volumes:
+            - pgdata:/var/lib/postgresql/data
+        restart: always
+
+volumes:
+    pgdata:
+    raskolnikovv_files:

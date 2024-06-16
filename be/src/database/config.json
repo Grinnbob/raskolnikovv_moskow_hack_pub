@@ -1,0 +1,50 @@
+{
+  "dev": {
+    "host": "localhost",
+    "port": 5432,
+    "username": "raskolnikovv",
+    "password": "fdveqe323ecc3weqvc23d",
+    "database": "raskolnikovvDB",
+    "dialect": "postgres",
+    "seederStorage": "sequelize",
+    "seederStorageTableName": "sequelize_seeds_data",
+    "migrationStorage": "sequelize",
+    "migrationStorageTableName": "sequelize_migrations_data"
+  },
+  "docker": {
+    "host": "postgres",
+    "port": 5432,
+    "username": "raskolnikovv",
+    "password": "fdveqe323ecc3weqvc23d",
+    "database": "raskolnikovvDB",
+    "dialect": "postgres",
+    "seederStorage": "sequelize",
+    "seederStorageTableName": "sequelize_seeds_data",
+    "migrationStorage": "sequelize",
+    "migrationStorageTableName": "sequelize_migrations_data"
+  },
+  "test": {
+    "host": "postgres",
+    "port": 5432,
+    "username": "raskolnikovv",
+    "password": "fdveqe323ecc3weqvc23d",
+    "database": "raskolnikovvDB",
+    "dialect": "postgres",
+    "seederStorage": "sequelize",
+    "seederStorageTableName": "sequelize_seeds_data",
+    "migrationStorage": "sequelize",
+    "migrationStorageTableName": "sequelize_migrations_data"
+  },
+  "prod": {
+    "host": "postgres",
+    "port": 5432,
+    "username": "raskolnikovv",
+    "password": "fdveqe323ecc3weqvc23d",
+    "database": "raskolnikovvDB",
+    "dialect": "postgres",
+    "seederStorage": "sequelize",
+    "seederStorageTableName": "sequelize_seeds_data",
+    "migrationStorage": "sequelize",
+    "migrationStorageTableName": "sequelize_migrations_data"
+  }
+}
