@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
-import * as path from 'path';
-import * as dbConfig from './database/config.json';
 import { User } from './users/users.model';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
@@ -33,47 +31,24 @@ import { VacancyViews } from './vacancy/vacancy-views.model';
 import { VacancyResponds } from './vacancy/vacancy-responds.model';
 import { ResumeLikes } from './resume/resume-likes.model';
 import { ResumeViews } from './resume/resume-views.model';
-import { ResumeResponds } from './resume/resume-responds.model';
-import { Contact } from './contacts/contacts.model';
-import { ContactsModule } from './contacts/contacts.module';
 import { Category } from './category/category.model';
 import { CategoryModule } from './category/category.module';
 import { Industry } from './industry/industry.model';
 import { IndustryModule } from './industry/industry.module';
 import { IndustryResume } from './industry/industry-resume.model';
 import { IndustryCompany } from './industry/industry-company.model';
-import { CityModule } from './city/city.module';
-import { City } from './city/city.model';
 import { ResumeSkill } from './skills/resume-skill.model';
 import { LanguageModule } from './language/language.module';
 import { Language } from './language/language.model';
 import { LanguageResume } from './language/language-resume.model';
 import { LanguageVacancy } from './language/language-vacancy.model';
-import { ThrottlerModule } from '@nestjs/throttler';
 import { FilesModule } from './files/files.module';
 import { VacancySkill } from './skills/vacancy-skill.model';
 import { CompanyRatings } from './company/company-rating.model';
-import { Citizenship } from './citizenship/citizenship.model';
-import { CitizenshipResume } from './citizenship/citizenship-resume.model';
-import { CitizenshipVacancy } from './citizenship/citizenship-vacancy.model';
-import { CitizenshipModule } from './citizenship/citizenship.module';
-import { CompanyOwners } from './company/company-owners.model';
-import { PinoLoggerModule } from './logger/logger.module';
-import { FinanceAccount } from './financeAccounts/financeAccounts.model';
-import { FinanceAccountsModule } from './financeAccounts/financeAccounts.module';
-import { Charge } from './charges/charges.model';
-import { ChargesModule } from './charges/charges.module';
-import { Price } from './prices/prices.model';
-import { PricesModule } from './prices/prices.module';
 import { VacancyComplaints } from './vacancy/vacancy-complaints.model';
 import { VacancyComments } from './vacancy/vacancy-comments.model';
 import { ResumeComplaints } from './resume/resume-complaints.model';
 import { ResumeComments } from './resume/resume-comments.model';
-import { ResumeLimit } from './limits/resumeLimits.model';
-import { LimitsModule } from './limits/limits.module';
-import { VacancyLimit } from './limits/vacancyLimits.model';
-import { ResumeViewLimit } from './limits/resumeViewLimits.model';
-import { ResumeCommentLikes } from './resume/resume-comment-likes.model';
 import { VacancyCommentLikes } from './vacancy/vacancy-comment-likes.model';
 
 @Module({
@@ -82,7 +57,7 @@ import { VacancyCommentLikes } from './vacancy/vacancy-comment-likes.model';
   imports: [
     ThrottlerModule.forRoot([
       {
-        ttl: 10000, 
+        ttl: 90000, 
         limit: 100, 
       },
     ]), 
@@ -108,7 +83,6 @@ import { VacancyCommentLikes } from './vacancy/vacancy-comment-likes.model';
         WorkExperience,
         Company,
         CompanyRatings,
-        CompanyOwners,
         EducationOrganization,
         Vacancy,
         Benefit,
@@ -125,34 +99,16 @@ import { VacancyCommentLikes } from './vacancy/vacancy-comment-likes.model';
         ResumeResponds,
         ResumeComplaints,
         ResumeComments,
-        ResumeCommentLikes,
-        Contact,
         Category,
         Industry,
         IndustryResume,
         IndustryCompany,
-        City,
         Language,
         LanguageResume,
         LanguageVacancy,
-        Citizenship,
-        CitizenshipResume,
-        CitizenshipVacancy,
-        FinanceAccount,
-        Charge,
-        Price,
-        ResumeLimit,
-        VacancyLimit,
-        ResumeViewLimit,
       ],
       autoLoadModels: true,
       synchronize: true,
-      
-
-      
-      
-      
-      
     }),
     UsersModule,
     RolesModule,
@@ -165,18 +121,11 @@ import { VacancyCommentLikes } from './vacancy/vacancy-comment-likes.model';
     VacancyModule,
     BenefitsModule,
     ResumeModule,
-    ContactsModule,
     CategoryModule,
     IndustryModule,
-    CityModule,
     LanguageModule,
-    CitizenshipModule,
     FilesModule,
     PinoLoggerModule,
-    FinanceAccountsModule,
-    ChargesModule,
-    PricesModule,
-    LimitsModule,
   ],
 })
 export class AppModule {}

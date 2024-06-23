@@ -2,7 +2,6 @@
 
 import React, { forwardRef, useEffect, useRef } from 'react';
 import { Loader } from '../../shared/ui/Loader';
-import { DivFC } from '../../shared/ui/DivFC';
 import clsx from 'clsx';
 
 export type InfinityScrollProps = React.HTMLAttributes<HTMLDivElement> & {
@@ -20,9 +19,8 @@ export const InfinityScroll = forwardRef<HTMLDivElement, InfinityScrollProps>(
       children,
       inverted,
       onFetchNext,
-      isLoading,
       loaderClass,
-      As = DivFC,
+      As,
       ...rest
     },
     ref,
@@ -45,7 +43,7 @@ export const InfinityScroll = forwardRef<HTMLDivElement, InfinityScrollProps>(
     useEffect(() => {
       observerRef.current = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting && !entry.target.hasChildNodes()) {
+          if (entry.target.hasChildNodes()) {
             cbRef.current?.();
           }
         },

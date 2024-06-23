@@ -956,4 +956,76 @@ export class VacancyService {
       });
     }
   }
+
+  @Cron(CronExpression.EVERY_MINUTE)
+  async publishingService() {
+    const traceId = uuid();
+    this.logger.info(VacancyService.name, '...publishingService started...', {
+      traceId,
+    });
+    const start = performance.now();
+    let count = 0;
+    try {
+      const plannedVacancyIds = await this.cacheManager.get<number[]>(
+        'plannedVacancyIds',
+      );
+      if (!plannedVacancyIds?.length) return;
+
+      const vacancies = await this.vacancyRepository.findAll({
+        where: {
+          id: {
+            [Op.in]: plannedVacancyIds,
+          },
+          publishDate: {
+            // [Op.gte]: moment().add(-1, 'minute').toDate(),
+            [Op.lte]: moment().add(1, 'minute').toDate(),
+          },
+        },
+      });
+      for (const vacancy of vacancies) {
+        try {
+          count++;
+          await this.vacancyRepository.update(
+            {
+              isActive: true,
+            },
+            {
+              where: {
+                id: vacancy.id,
+              },
+            },
+          );
+        } catch (e) {
+          this.logger.error(VacancyService.name, 'publishingService errored', {
+            stack: e.stack,
+            traceId,
+          });
+        }
+      }
+      const updatedPlannedVacancyIds = plannedVacancyIds.filter(
+        (id) => vacancies.find((v) => v.id === id),
+      );
+      await this.cacheManager.set(
+        'plannedVacancyIds',
+        updatedPlannedVacancyIds,
+      );
+      this.logger.info(
+        VacancyService.name,
+        '...publishingService finished...',
+        {
+          plannedVacancyIds,
+          vacanciesPublished: count,
+          timeSpent: performance.now() - start + 'ms',
+          traceId,
+        },
+      );
+    } catch (e) {
+      this.logger.error(VacancyService.name, 'publishingService error', {
+        stack: e.stack,
+        vacanciesPublished: count,
+        timeSpent: performance.now() - start + 'ms',
+        traceId,
+      });
+    }
+  }
 }
